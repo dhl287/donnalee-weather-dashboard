@@ -6,9 +6,6 @@ var search = $('#search');
 var lat = '';
 var lon = '';  
 var city = '';
-var searchBtn = $('#searchBtn');
-
-
 
 function getWeatherByLocation() {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`, { origin: "cros" })
@@ -43,9 +40,9 @@ function getWeatherByLocation() {
 
           weather.innerHTML = `
           <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${temp}°F <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /></h2>
-          <small>Description: ${data.weather[0].main}</small><br><br>
-          <small>Humidity: ${data.main.humidity}</small><br><br>
-          <small>Wind Speed: ${data.wind.speed}</small><br><br>
+          <h4>${data.weather[0].main}</h4>
+          <h4>Humidity: ${data.main.humidity}</h4>
+          <h4>Wind Speed: ${data.wind.speed}</h4>
           
           `;
 
