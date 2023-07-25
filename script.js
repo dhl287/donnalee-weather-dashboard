@@ -37,16 +37,13 @@ function getWeatherByLocation() {
           var weather = document.createElement('div')
           weather.classList.add('weather');
           
-
           weather.innerHTML = `
           <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${temp}°F <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /></h2>
           <h4>${data.weather[0].main}</h4>
           <h4>Humidity: ${data.main.humidity}</h4>
           <h4>Wind Speed: ${data.wind.speed}</h4>
-          
           `;
 
-      
           main.innerHTML= "";
            main.append(weather);
       };
