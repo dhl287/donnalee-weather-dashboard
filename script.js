@@ -73,3 +73,15 @@ function getWeatherByLocation() {
         }
 
      });
+
+    //  form.on('clear',(event) =>{
+    //   console.log("CLEAR")
+    //     event.preventDefault();
+
+    //     city = search.val();
+    //     console.log(city);
+    //     if(city){
+    //         getWeatherByLocation()
+    //     }
+
+    //  });
