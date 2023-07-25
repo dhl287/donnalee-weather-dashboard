@@ -35,22 +35,23 @@ function getWeatherByLocation() {
   }
 
       function addWeatherToPage(data){
-          const temp = Ktof(data.main.temp);
+          var temp = Ktof(data.main.temp);
 
-          const weather = document.createElement('div')
+          var weather = document.createElement('div')
           weather.classList.add('weather');
           
 
           weather.innerHTML = `
           <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${temp}°F <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /></h2>
-          <small>${data.weather[0].main}</small>
+          <small>Description: ${data.weather[0].main}</small><br><br>
+          <small>Humidity: ${data.main.humidity}</small><br><br>
+          <small>Wind Speed: ${data.wind.speed}</small><br><br>
           
           `;
 
-
       
           main.innerHTML= "";
-           main.appendChild(weather);
+           main.append(weather);
       };
 
     // Kelvin to Fahrenheit formula
@@ -58,29 +59,7 @@ function getWeatherByLocation() {
          return Math.floor((K - 273.15) * 1.8 + 32);
      }
 
-     function addWeatherToPage(data){
-        const temp = Ktof(data.main.temp);
-
-        const weather = document.createElement('div')
-        weather.classList.add('weather');
-        
-
-        weather.innerHTML = `
-        <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${temp}°F <img src="https://openweathermap.org/img/wn/${data.weather[1].icon}@2x.png" /></h2>
-        <small>${data.weather[1].main}</small>
-        
-        `;
-
-
-    
-        main.innerHTML= "";
-         main.append(weather);
-    };
-
-  // Kelvin to Fahrenheit formula
-   function Ktof(K){
-       return Math.floor((K - 273.15) * 1.8 + 32);
-   }
+  
 
 
      form.on('submit',(event) =>{
