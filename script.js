@@ -1,3 +1,4 @@
+// unique API key
 var apiKey = "572661e61377e7d7c006042ef76c9263";
 
 var main = $('main');
@@ -7,8 +8,9 @@ var lat = '';
 var lon = '';  
 var city = '';
 
+// use API to get weather by location, fetch request
 function getWeatherByLocation() {
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`, { origin: "cros" })
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`, { mode: "cors" })
       .then((resp) => resp.json())
       .then((respData) => {
         console.log(respData);
@@ -31,6 +33,7 @@ function getWeatherByLocation() {
       });
   }
 
+  // add weather info to page and HTML
       function addWeatherToPage(data){
           var temp = Ktof(data.main.temp);
 
@@ -53,9 +56,7 @@ function getWeatherByLocation() {
          return Math.floor((K - 273.15) * 1.8 + 32);
      }
 
-  
-
-
+     // click search button event
      form.on('submit',(event) =>{
       console.log("SUBMIT")
         event.preventDefault();
@@ -67,7 +68,7 @@ function getWeatherByLocation() {
         }
 
      });
-
+     // click clear button event
     //  form.on('clear',(event) =>{
     //   console.log("CLEAR")
     //     event.preventDefault();
