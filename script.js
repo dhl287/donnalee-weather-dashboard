@@ -3,19 +3,31 @@ var apiKey = "572661e61377e7d7c006042ef76c9263";
 var main = $('main');
 var form = $('#form');
 var search = $('#search');
-var lat = '52.5';
-var lon = '-1.95';  
-var url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+var lat = '';
+var lon = '';  
 var city = '';
 var searchBtn = $('#searchBtn');
 
 
 
-function getWeatherByLocation(city) {
-    fetch(url(city), { origin: "cros" })
+function getWeatherByLocation() {
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`, { origin: "cros" })
       .then((resp) => resp.json())
       .then((respData) => {
-        addWeatherToPage(respData);
+        console.log(respData);
+        if(respData != null){
+        lat = respData.city.coord.lat;
+        lon = respData.city.coord.lon;
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`).then(
+          (resp) => resp.json()
+        ).then(
+          (respData) => {
+            console.log
+            addWeatherToPage(respData)
+          }
+        )
+        }
+        
       })
       .catch((error) => {
         console.error("Error occurred:", error);
@@ -54,7 +66,7 @@ function getWeatherByLocation(city) {
         
 
         weather.innerHTML = `
-        <h2><img src="https://openweathermap.org/img/wn/${data.weather[1].icon}@2x.png" /> ${temp}°F <img src="https://openweathermap.org/img/wn/${data.weather[1].icon}@2x.png" /></h2>
+        <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${temp}°F <img src="https://openweathermap.org/img/wn/${data.weather[1].icon}@2x.png" /></h2>
         <small>${data.weather[1].main}</small>
         
         `;
@@ -62,7 +74,7 @@ function getWeatherByLocation(city) {
 
     
         main.innerHTML= "";
-         main.appendChild(weather);
+         main.append(weather);
     };
 
   // Kelvin to Fahrenheit formula
@@ -71,13 +83,14 @@ function getWeatherByLocation(city) {
    }
 
 
-     form.addEventListener('submit',(event) =>{
+     form.on('submit',(event) =>{
+      console.log("SUBMIT")
         event.preventDefault();
 
-        var city = search.value;
-
+        city = search.val();
+        console.log(city);
         if(city){
-            getWeatherByLocation(city)
+            getWeatherByLocation()
         }
 
      });
