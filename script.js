@@ -8,9 +8,14 @@ var lat = '';
 var lon = '';  
 var city = '';
 
-// use API to get weather by location, fetch request
+for (let i = 0; i < 5; i++) {
+  console.log((i * 7) + 1);
+}
+
+
+// use API to get weather by location, fetch request, 5-day, update function name to 5-day
 function getWeatherByLocation() {
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`, { mode: "cors" })
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`, { mode: "cors" })
       .then((resp) => resp.json())
       .then((respData) => {
         console.log(respData);
@@ -21,8 +26,8 @@ function getWeatherByLocation() {
           (resp) => resp.json()
         ).then(
           (respData) => {
-            console.log
-            addWeatherToPage(respData)
+            console.log(respData)
+            addWeatherToPageFive(respData)
           }
         )
         }
@@ -33,15 +38,51 @@ function getWeatherByLocation() {
       });
   }
 
-  // add weather info to page and HTML
+  function getCurrentWeather() {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`)
+    .then((resp) => resp.json())
+      .then((respData) => {
+        console.log(respData);
+        addWeatherToPage(respData)
+      })
+      .catch((error) => {
+        console.error("Error occurred:", error);
+      });
+  }
+
+
+// add weather info to page and HTML, 5-day weather call
+function addWeatherToPageFive(data){
+  
+  var weatherFive = document.createElement('div')
+  weatherFive.classList.add('weather');
+  
+  for (let i = 0; i < 5; i++) {
+    console.log((i * 7) + 1);
+    if (data.list === 0)
+  weather.innerHTML = `
+  <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${data.main.temp}°F <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /></h2>
+  <h4>${data.weather[0].main}</h4>
+  <h4>Humidity: ${data.main.humidity}</h4>
+  <h4>Wind Speed: ${data.wind.speed}</h4>
+  `;
+  }
+
+  section.innerHTML= "";
+  section.append(weatherFive);
+};
+
+
+
+  // add weather info to page and HTML, current weather call
       function addWeatherToPage(data){
-          var temp = Ktof(data.main.temp);
+          // var temp = Ktof(data.main.temp);
 
           var weather = document.createElement('div')
           weather.classList.add('weather');
           
           weather.innerHTML = `
-          <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${temp}°F <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /></h2>
+          <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${data.main.temp}°F <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /></h2>
           <h4>${data.weather[0].main}</h4>
           <h4>Humidity: ${data.main.humidity}</h4>
           <h4>Wind Speed: ${data.wind.speed}</h4>
@@ -51,30 +92,7 @@ function getWeatherByLocation() {
           main.append(weather);
       };
 
-    // Kelvin to Fahrenheit formula
-     function Ktof(K){
-         return Math.floor((K - 273.15) * 1.8 + 32);
-     }
 
-    
-      // // render each daily forecast
-      // forecast.forEach(day => {
-      //   let date = new Date(day.dt * 1000);
-      //   let days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-      //   let name = days[date.getDay()];
-      //   let dayBlock = document.createElement("div");
-      //   dayBlock.className = 'forecast__item';
-      //   dayBlock.innerHTML =
-      //     `<div class="forecast-item__heading">${name}</div>
-      //     <div class="forecast-item__info">
-      //     <i class="wi ${applyIcon(day.weather[0].icon)}"></i>
-      //     <span class="degrees">${Math.round(day.temp.day)}
-      //     <i class="wi wi-degrees"></i></span></div>`;
-        
-      //     main.innerHTML= "";
-      //     main.append(dayBlock);
-      // });
-    
 
 
      // click search button event
@@ -86,6 +104,7 @@ function getWeatherByLocation() {
         console.log(city);
         if(city){
             getWeatherByLocation()
+            getCurrentWeather()
         }
 
      });
