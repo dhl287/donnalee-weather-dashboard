@@ -12,6 +12,19 @@ for (let i = 0; i < 5; i++) {
   console.log((i * 7) + 1);
 }
 
+// use API to get weather by location, fetch request, current day
+function getCurrentWeather() {
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`)
+  .then((resp) => resp.json())
+    .then((respData) => {
+      console.log(respData);
+      addWeatherToPage(respData)
+    })
+    .catch((error) => {
+      console.error("Error occurred:", error);
+    });
+}
+
 
 // use API to get weather by location, fetch request, 5-day, update function name to 5-day
 function getWeatherByLocation() {
@@ -38,17 +51,7 @@ function getWeatherByLocation() {
       });
   }
 
-  function getCurrentWeather() {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`)
-    .then((resp) => resp.json())
-      .then((respData) => {
-        console.log(respData);
-        addWeatherToPage(respData)
-      })
-      .catch((error) => {
-        console.error("Error occurred:", error);
-      });
-  }
+ 
 
 
 // add weather info to page and HTML, 5-day weather call
