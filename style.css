@@ -28,10 +28,23 @@ header {
     text-align: center;
   }
 
-
   .weather {
     display: block;
     justify-content: center;
     text-align: center;
+
+  }
+
+  .searchHistory {
+    margin: auto;
+    padding: 50px;
+    display: block;
+    justify-content: center;
+    text-align: center;
+}
+
+  #historyHeader {
+    font-size: 20px;
+    font-weight: bold;
   }
 
