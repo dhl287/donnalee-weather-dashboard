@@ -135,7 +135,7 @@ function displaySearchHistory() {
   // iterate through the search history and create list items (up to 5 items)
   for (let i = startIndex; i < searchHistory.length; i++) {
     var searchTerm = searchHistory[i];
-    var listItem = $('<li></li>').text(searchTerm);
+    var listItem = $('<li class="text-base hover:text-blue-500"></li>').text(searchTerm);
     searchHistoryList.append(listItem);
   };
 }
@@ -146,3 +146,19 @@ function displaySearchHistory() {
 displaySearchHistory();
 
 
+// Function to add a click event listener to search history items
+function handleHistoryItemClick() {
+  $('#searchHistoryList').on('click', 'li', function() {
+    var clickedSearchTerm = $(this).text();
+    // Call getCurrentWeather() with the clicked search term
+    getCurrentWeatherWithSearchTerm(clickedSearchTerm);
+  });
+}
+
+function getCurrentWeatherWithSearchTerm(searchTerm) {
+  city = searchTerm;
+  getCurrentWeather();
+}
+
+displaySearchHistory();
+handleHistoryItemClick();
