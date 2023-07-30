@@ -4,6 +4,7 @@ var apiKey = "572661e61377e7d7c006042ef76c9263";
 var main = $('main');
 var form = $('#form');
 var search = $('#search');
+var searchBtn = $('#searchBtn');
 var lat = '';
 var lon = '';  
 var city = '';
@@ -61,7 +62,7 @@ function getCurrentWeather() {
           
           weather.innerHTML = `
           <h2>${data.name}</h2>
-          <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${data.main.temp}°F <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /></h2>
+          <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${data.main.temp}°F </h2>
           <h4>${data.weather[0].main}</h4>
           <h4>Humidity: ${data.main.humidity}</h4>
           <h4>Wind Speed: ${data.wind.speed}</h4>
@@ -70,6 +71,7 @@ function getCurrentWeather() {
           main.innerHTML= "";
           main.append(weather);
       };
+
 
 // click search button event
 form.on('submit',(event) =>{
@@ -83,6 +85,20 @@ form.on('submit',(event) =>{
     }
 
   });
+
+  // clear weather results function, will be added to click clear button event
+  function clearWeatherResults () {
+    $(".weather").html("");
+    addToSearchHistory();
+
+  }
+
+  // click clear button event
+  $("#clearBtn").on('click', function(event) {
+    event.preventDefault();
+    clearWeatherResults();
+  });
+
 
 // get the search history from local storage if available
 let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
@@ -124,9 +140,9 @@ function displaySearchHistory() {
   };
 }
 
-// click clearBtn to add search history
-$('#clearBtn').on('click', addToSearchHistory);
+
 
 // display the initial search history when the page loads
 displaySearchHistory();
+
 
