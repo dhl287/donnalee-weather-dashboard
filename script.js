@@ -45,6 +45,8 @@ function getCurrentWeather() {
 //   .then((resp) => resp.json())
 //     .then((respData) => {
 //       console.log(respData);
+//       for (let i = 0; i < 5; i++) {
+        
 //       addWeatherToPage(respData)
 //     })
 //     .catch((error) => {
@@ -141,12 +143,7 @@ function displaySearchHistory() {
 }
 
 
-
-// display the initial search history when the page loads
-displaySearchHistory();
-
-
-// Function to add a click event listener to search history items
+// click event listener to search history list items
 function handleHistoryItemClick() {
   $('#searchHistoryList').on('click', 'li', function() {
     var clickedSearchTerm = $(this).text();
