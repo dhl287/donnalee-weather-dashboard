@@ -48,5 +48,9 @@ header {
     font-weight: bold;
   }
 
-  
+  #icon {
+    display: block;
+    justify-content: center;
+    text-align: center;
+  }
 

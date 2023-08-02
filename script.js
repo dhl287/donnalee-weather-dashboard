@@ -2,6 +2,7 @@
 var apiKey = "572661e61377e7d7c006042ef76c9263";
 
 var main = $('main');
+var five = $('#five');
 var form = $('#form');
 var search = $('#search');
 var searchBtn = $('#searchBtn');
@@ -10,7 +11,7 @@ var lon = '';
 var city = '';
 
 // for (let i = 0; i < 5; i++) {
-//   console.log((i * 7) + 1);
+//   const element = array[index];
 // }
 
 
@@ -39,32 +40,32 @@ function getCurrentWeather() {
       });
   }
 
-//use API to get weather by location, fetch request, current day, 5-day weather
-// function getFiveWeather() {
-//   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`)
-//   .then((resp) => resp.json())
-//     .then((respData) => {
-//       console.log(respData);
-//       for (let i = 0; i < 5; i++) {
-        
-//       addWeatherToPage(respData)
-//     })
-//     .catch((error) => {
-//       console.error("Error occurred:", error);
-//     });
-// }
+// use API to get weather by location, fetch request, current day, 5-day weather
+function getFiveWeather() {
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`)
+  .then((resp) => resp.json())
+    .then((respData) => {
+      console.log(respData);
+      addWeatherToPage(respData)
+})
+
+    .catch((error) => {
+      console.error("Error occurred:", error);
+    });
+}
+
 
 
   // add weather info to page and HTML, current weather call
       function addWeatherToPage(data){
-          // var temp = Ktof(data.main.temp);
 
           var weather = document.createElement('div')
           weather.classList.add('weather');
           
           weather.innerHTML = `
           <h2>${data.name}</h2>
-          <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${data.main.temp}°F </h2>
+          <h2>Current Weather</h2>
+          <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" id="icon" /> ${data.main.temp}°F </h2>
           <h4>${data.weather[0].main}</h4>
           <h4>Humidity: ${data.main.humidity}</h4>
           <h4>Wind Speed: ${data.wind.speed}</h4>
