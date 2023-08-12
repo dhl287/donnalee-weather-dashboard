@@ -29,7 +29,7 @@ If the user does not click the clear button to clear the page and initiates a ne
 ![image](https://github.com/dhl287/donnalee-weather-dashboard/assets/133473429/3e050784-694c-4650-8882-97dd0ac8138e)
 
 The challenge has been deployed. 
-* [Deployed Link] https://dhl287.github.io/donnalee-workday-scheduler/ 
+* [Deployed Link] https://dhl287.github.io/donnalee-weather-dashboard/ 
 
 ## Credits
 I would like to credit the following sources for study materials in adding all code: 
