@@ -166,7 +166,7 @@ function displaySearchHistory() {
   searchHistoryList.empty();
 
   // create starting index to display the search history, only show 5 items
-  let startIndex = Math.max(0, searchHistory.length - 5);
+  let startIndex = Math.max(0, searchHistory.length - 10);
 
   // iterate through the search history and create list items (up to 5 items)
   for (let i = startIndex; i < searchHistory.length; i++) {
