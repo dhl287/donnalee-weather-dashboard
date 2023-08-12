@@ -96,6 +96,7 @@ function renderFive(weatherArray) {
           
           weather.innerHTML = `
           <h2 class="text-2xl font-semibold">${data.name}</h2>
+          <h4 id="date">${dayjs(data.dt * 1000).format("MM/DD/YYYY")}</h4
           <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" id="icon" /> ${data.main.temp}°F </h2>
           <h4>${data.weather[0].main}</h4>
           <h4>Humidity: ${data.main.humidity}</h4>

@@ -1,25 +1,30 @@
 # donnalee-weather-dashboard
 
 ## Description
-This challenge required me to create a Workday Scheduler application that allows a user to save events for each hour of a typical working day (9AM-5PM). The starter code was provided but updates was made in HTML, CSS, and JavaScript (powered by jQuery) to fulfill the acceptance criteria. 
+This challenge required me to create a Weather Dashboard that allows a user to search for a city and retrieve the weather data for that city. The current weather (today's weather) and the weather for the following five days are visible for every searched city, and the searched city is moved to the search history once the user clicks clear and clears the search. 
 
 ## Installation
-My responsibility was to satisfy the acceptance criteria, create a new repository on GitHub, commit and push any changes to the repository, and deploy to GitHub Pages to view the website live. The HTML code is available on index.html, the CSS code is available on style.css, and JavaScript code is available on script.js in the donnalee-workday-scheduler folder.
+My responsibility was to satisfy the acceptance criteria, create a new repository on GitHub, commit and push any changes to the repository, and deploy to GitHub Pages to view the website live. The weather dashboard was created with no starter code. The HTML code is available on index.html, the CSS code is available on style.css, styling was also added through Tailwind CSS, and JavaScript code (powered by jQuery) is available on script.js in the donnalee-weatherdashboard. 
 
 ## Usage
-The Workday Scheduler already had a foundation with the provided starter code, but changes were made to fulfill the acceptance criteria. 
+The user is able to search by city in the search field. They can click "enter" on their keyboard or click the search button to initiate the search. 
 
-The current date is visible in the header of the body. The example shows that the current date is July 18, 2023.
+<!-- search field image -->
 
-![image](https://github.com/dhl287/donnalee-workday-scheduler/assets/133473429/f60723d0-9693-41e5-bf82-e1dbf9d883f7)
+The "Current Weather" and "Next Five Days of Weather" sections below the search field show the areas where the city's weather information will be displayed when the search is initiated. The city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed are displayed for the current day in the "Current Weather" section. The same information is then displayed for the next five days in the "Next Five Days of Weather" section. 
 
-The time blocks change colors depending on whether they are past (#d3d3d3), present (#ff6961), or future (#77dd77). The image below only shows the colors used for the past and present, but the time blocks change colors properly according to the current, past, and future hour.
+<!-- current weather and 5-day weather image -->
 
-![image](https://github.com/dhl287/donnalee-workday-scheduler/assets/133473429/c72cad2a-ca6c-4da5-a561-9a232d17c047)
+The user can click the clear button to clear the page and start a new search. The cleared city name will be shown in the "Search History" section. When the user clicks a city name in the "Search History" section, the page will display the current weather and five days of weather for that particular city. 
 
-When adding an event in the time block and clicking the button with the disk icon (save button), the event saves to the Workday Scheduler. When you refresh the page, the event is set and saved on the Workday Scheduler (local storage). The event will be removed when the user manually removes the event and clicks the button with the disk icon (save button).
+<!-- search history image -->
 
-![image](https://github.com/dhl287/donnalee-workday-scheduler/assets/133473429/7dc1cac1-4451-45ea-8558-0b6184bbf174)
+## Areas of Opportunity
+Depending on the time of day that you search a city, the Current Weather and first day of the five days of weather may be different or the same. 
+
+If the user does not click the clear button to clear the page and initiates a new search, the weather information for the previously searched city and newly searched city will appear in the "Current Weather" and "Next Fives Days of Weather" sections.
+
+<!-- image of two city searches when not clicking clear button -->
 
 The challenge has been deployed. 
 * [Deployed Link] https://dhl287.github.io/donnalee-workday-scheduler/ 
@@ -27,9 +32,10 @@ The challenge has been deployed.
 ## Credits
 I would like to credit the following sources for study materials in adding all code: 
 
-* [jQuery: Traversing] https://api.jquery.com/category/traversing/ 
-* [jQuery: Attributes] https://api.jquery.com/category/attributes/ 
+* [Tailwind CSS Documentation] https://tailwindcss.com/docs/installation/play-cdn
+* [CodWithRandom] https://www.codewithrandom.com/2023/03/16/weather-app-javascript-weather-app-using-html-css-javascript/
 * [Day.js Format] https://day.js.org/docs/en/display/format 
+* [5 day weather forecast] https://openweathermap.org/forecast5
 
 ## License
-There is no license associated with donnalee-workday-scheduler.
+There is no license associated with donnalee-weather-dashboard.
