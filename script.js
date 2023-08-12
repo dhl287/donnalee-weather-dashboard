@@ -1,8 +1,8 @@
 // unique API key
 var apiKey = "572661e61377e7d7c006042ef76c9263";
 
-var main = $('main');
-var five = $('.five');
+var main = $('#main');
+var five = $('#five');
 var form = $('#form');
 var search = $('#search');
 var searchBtn = $('#searchBtn');
@@ -10,17 +10,14 @@ var lat = '';
 var lon = '';  
 var city = '';
 
-// for (let i = 0; i < 5; i++) {
-//   const element = array[index];
-// }
 
-
-// use API to get weather by location, fetch request, current weather
-function getCurrentWeather() {
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`, { mode: "cors" })
+// use API to get weather by location, fetch request, current and 5-day weather
+function getWeather() {
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`, { mode: "cors" })
       .then((resp) => resp.json())
       .then((respData) => {
         console.log(respData);
+        renderFive(respData.list)
         
         if(respData != null){
         lat = respData.city.coord.lat;
@@ -41,54 +38,64 @@ function getCurrentWeather() {
       });
   }
 
-// use API to get weather by location, fetch request, current day, 5-day weather
-function getFiveWeather() {
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`)
-  .then((resp) => resp.json())
-    .then((respData) => {
-      console.log(respData);
-      renderFive(respData);
-})
-
-    .catch((error) => {
-      console.error("Error occurred:", error);
-    });
-}
-
 // display 5-day forecast
 function renderFive(weatherArray) {
-  var dayOne = dayjs().add(1, 'day').startOf('day').unix();
-  var dayFive = dayjs().add(6, 'day').startOf('day').unix();
-  var displayFive = document.createElement('div');
-  var displayFiveSize = document.createElement('h4');
-  var weatherArray = data.list;
 
-  displayFive.setAttribute('class', 'col-12');
-  displayFiveSize.textContent = '5-Day Forecast: ';
-  displayFive.append(displayFiveSize);
+  console.log(weatherArray)
 
-  for (var i = 0; i < weatherArray.length; i++) {
-    if (weatherArray[i].dt >= dayOne && weatherArray[i].dt < dayFive) {
+  var dayOne = dayjs().add(1, 'day').format("YYYY-MM-DD 00:00:00");
+  var dayTwo = dayjs().add(2, 'day').format("YYYY-MM-DD 00:00:00");
+  var dayThree = dayjs().add(3, 'day').format("YYYY-MM-DD 00:00:00");
+  var dayFour = dayjs().add(4, 'day').format("YYYY-MM-DD 00:00:00");
+  var dayFive = dayjs().add(5, 'day').format("YYYY-MM-DD 00:00:00");
 
-      if (weatherArray[i].dt_txt.slice(11, 13) == "12") {
-        console.log(weatherArray[i]);
-        
-      }
-    }
+  console.log(dayOne, dayTwo, dayThree, dayFour, dayFive);
+
+  var dayOneData = weatherArray.find(element => element.dt_txt == dayOne);
+  var dayTwoData = weatherArray.find(element => element.dt_txt == dayTwo);
+  var dayThreeData = weatherArray.find(element => element.dt_txt == dayThree);
+  var dayFourData = weatherArray.find(element => element.dt_txt == dayFour);
+  var dayFiveData = weatherArray.find(element => element.dt_txt == dayFive);
+
+  var fiveDayData = [
+    dayOneData,
+    dayTwoData,
+    dayThreeData,
+    dayFourData,
+    dayFiveData
+  ]
+
+  for(i = 0; i < fiveDayData.length; i++) {
+    
+    var fiveWeather = document.createElement('div');
+    fiveWeather.classList.add('five-weather');
+    
+    var data = fiveDayData[i];
+    fiveWeather.innerHTML = `
+        <h4 id="date">${dayjs(data.dt * 1000).format("MM/DD/YYYY")}</h4
+        <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" /> ${data.main.temp}°F </h2>
+        <h4>${data.weather[0].main}</h4>
+        <h4>Humidity: ${data.main.humidity}</h4>
+        <h4>Wind Speed: ${data.wind.speed}</h4>
+        <br>
+        <hr>
+        <br>
+    `;
+
+    five.innerHTML = "";
+    five.append(fiveWeather);
   }
-  addWeatherToPage();
 };
 
 
   // add weather info to page and HTML, current weather call
       function addWeatherToPage(data){
 
-          var weather = document.createElement('div')
+          var weather = document.createElement('div');
           weather.classList.add('weather');
           
           weather.innerHTML = `
-          <h2>${data.name}</h2>
-          <h2>Current Weather</h2>
+          <h2 class="text-2xl font-semibold">${data.name}</h2>
           <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" id="icon" /> ${data.main.temp}°F </h2>
           <h4>${data.weather[0].main}</h4>
           <h4>Humidity: ${data.main.humidity}</h4>
@@ -99,27 +106,6 @@ function renderFive(weatherArray) {
           main.append(weather);
       };
 
-        // add weather info to page and HTML, current weather call, 5-day
-      //   function addWeatherToPageFive(data){
-
-      //     var weatherFive = document.createElement('div')
-      //     weatherFive.classList.add('weatherFive');
-          
-      //     if (weatherArray[i].dt_txt === 1690977600) {
-      //     weatherFive.innerHTML = `
-      //     <h2>${data.name}</h2>
-      //     <h2>Current Weather</h2>
-      //     <h2><img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" id="icon" /> ${data.main.temp}°F </h2>
-      //     <h4>${data.weather[0].main}</h4>
-      //     <h4>Humidity: ${data.main.humidity}</h4>
-      //     <h4>Wind Speed: ${data.wind.speed}</h4>
-      //     `;
-
-      //     five.innerHTML= "";
-      //     five.append(weather);
-      //   }
-      // };
-
 
 // click search button event
 form.on('submit',(event) =>{
@@ -129,7 +115,7 @@ form.on('submit',(event) =>{
   city = search.val();
   console.log(city);
     if(city){
-      getCurrentWeather()
+      getWeather()
     }
 
   });
@@ -137,6 +123,7 @@ form.on('submit',(event) =>{
   // clear weather results function, will be added to click clear button event
   function clearWeatherResults () {
     $(".weather").html("");
+    $(".five-weather").html("");
     addToSearchHistory();
 
   }
@@ -193,14 +180,14 @@ function displaySearchHistory() {
 function handleHistoryItemClick() {
   $('#searchHistoryList').on('click', 'li', function() {
     var clickedSearchTerm = $(this).text();
-    // Call getCurrentWeather() with the clicked search term
-    getCurrentWeatherWithSearchTerm(clickedSearchTerm);
+    // Call getWeather() with the clicked search term
+    getWeatherWithSearchTerm(clickedSearchTerm);
   });
 }
 
-function getCurrentWeatherWithSearchTerm(searchTerm) {
+function getWeatherWithSearchTerm(searchTerm) {
   city = searchTerm;
-  getCurrentWeather();
+  getWeather();
 }
 
 displaySearchHistory();

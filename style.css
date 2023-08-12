@@ -28,11 +28,31 @@ header {
     text-align: center;
   }
 
-  .weather {
+  #main {
     display: block;
     justify-content: center;
     text-align: center;
+    border-style: solid;
+    border-width: 10px;
+    border-color: aliceblue;
+    margin: 50px;
+    padding: 20px;
+  }
 
+  #five {
+    display: block;
+    justify-content: center;
+    text-align: center;
+    border-style: solid;
+    border-width: 10px;
+    border-color: aliceblue;
+    margin: 50px;
+    padding: 20px;
+  }
+
+  #date {
+    font-size: 20px;
+    font-weight: bold;
   }
 
   .searchHistory {
@@ -48,9 +68,9 @@ header {
     font-weight: bold;
   }
 
-  #icon {
-    display: block;
-    justify-content: center;
-    text-align: center;
+  img {
+    text-align:center;
+    display:block;
+    margin:auto;
   }
 
